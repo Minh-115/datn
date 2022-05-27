@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
-    protected $guarded=[];
+    protected $guarded = [];
+    protected $table = 'categories';
+   public function categoryChildrent(){
+       return   $this->hasMany(Category::class, 'parent_id');
+   }
+
+   public function products(){
+    return   $this->hasMany(Product::class, 'category_id');
+}
 }

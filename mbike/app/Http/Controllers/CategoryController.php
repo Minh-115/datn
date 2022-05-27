@@ -30,7 +30,7 @@ class CategoryController extends Controller
             'parent_id'=>$request->parent_id,
             'slug'=>str::slug($request->name),
         ]);
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.indexx');
     }
     public function getCategory($parentId)
     {
@@ -52,10 +52,11 @@ class CategoryController extends Controller
             'parent_id'=>$request->parent_id,
             'slug'=>str::slug($request->name)
         ]);
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.indexx');
     }
     public function delete($id)
     {
         Category::find($id)->delete();
+        return redirect()->route('categories.indexx');
     }
 }

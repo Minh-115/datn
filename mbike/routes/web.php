@@ -5,7 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderAdminController;
-
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/admin', [LoginController::class,'home'])->name('home');
-Route::get('/login', [LoginController::class,'login'])->name('get-login');
+Route::get('/login', [LoginController::class,'login'])->name('get-login');//not
 Route::post('/login',[LoginController::class,'postLogin'])->name('post-login');
 Route::get('/register',[LoginController::class,'register'])->name('get-register');
 Route::post('/register',[LoginController::class,'postRegister'])->name('post-register');
 Route::get('/logout',[LoginController::class,'logout'])->name('get-logout');
 Route::prefix('category')->group(function () {
-    Route::get('/',[CategoryController::class,'index'])->name('categories.index');
+    Route::get('/',[CategoryController::class,'index'])->name('categories.indexx');
     Route::get('/create',[CategoryController::class,'create'])->name('categories.create');
     Route::post('/store',[CategoryController::class,'store'])->name('categories.store');
     Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('categories.edit');
@@ -59,3 +59,33 @@ Route::prefix('slider')->group(function () {
     Route::post('/update/{id}',[SliderAdminController::class,'update'])->name('sliders.update');
     Route::get('/delete/{id}',[SliderAdminController::class,'delete'])->name('sliders.delete');
 });
+Route::get('/', 'HomeController@index');
+Route::get('/test', 'HomeController@test');
+
+Route::get('/addToCart/{id}', 'CartController@addToCart');
+Route::get('/detail/{id}', 'HomeController@detail');
+Route::get('/showcart', 'CartController@showcart');
+Route::post('/search', 'HomeController@search');
+Route::post('/load_comment', 'ProductController@load_comment');
+Route::post('/send_comment', 'ProductController@lsend_comment');
+
+
+Route::post('/save_cart', 'CartController@save_cart');
+Route::get('/delete/{rowId}', 'CartController@deleteCart');
+Route::get('/login_checkout', 'CheckoutController@login_checkout');
+Route::get('/logout_checkout', 'CheckoutController@logout_checkout');
+Route::post('/login_customer', 'CheckoutController@login_customer');
+
+Route::post('/add_customer', 'CheckoutController@add_customer');
+Route::get('/checkout', 'CheckoutController@checkout');
+Route::post('/payment', 'CheckoutController@payment');
+Route::post('/order_place', 'CheckoutController@order_place');
+
+Route::post('/save_checkout_customer', 'CheckoutController@save_checkout_customer');
+//order
+Route::get('/manage_order','CheckoutController@manage_order');
+Route::get('/view_order/{id}','CheckoutController@view_order');
+
+
+Route::get('/category/{slug}/{id}',[]);
+Route::get('/category/{slug}/{id}',[CategoryController::class,'product'])->name('categories.index');

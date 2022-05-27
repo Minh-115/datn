@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Components\MenuRecusive;
 use App\Models\Menu;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class MenuController extends Controller
 {
     private $menuRecusive;
@@ -28,7 +28,7 @@ class MenuController extends Controller
         Menu::create([
             'name'=>$request->name,
             'parent_id'=>$request->parent_id,
-            'slug'=>str_slug($request->name)
+            'slug'=>str::slug($request->name)
         ]);
         return redirect()->route('menus.index');
     }
@@ -44,12 +44,13 @@ class MenuController extends Controller
         Menu::find($id)->update([
             'name'=>$request->name,
             'parent_id'=>$request->parent_id,
-            'slug'=>str_slug($request->name)
+            'slug'=>str::slug($request->name)
         ]);
         return redirect()->route('menus.index');
     }
     public function delete($id)
     {
         Menu::find($id)->delete();
+        return redirect()->route('menus.index');
     }
 }

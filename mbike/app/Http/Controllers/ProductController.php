@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Components\Recusive;
+use App\Models\Comment;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Tag;
@@ -150,5 +151,31 @@ class ProductController extends Controller
     {
         $this->product->find($id)->delete($id);
         return redirect()->route('products.index');
+    }
+    public function load_comment(Request $request){
+       $id_product = $request->product_id;     
+       $comment = Comment::where('comment_product_id',$id_product)->get();
+       $put = '';
+       foreach($comment as $key=>$com){
+        $put.='<div class="row style_comment">
+        <div class="col-md-1">
+          
+          <img width="80%" src="'.url('image/users.png').'">
+        
+          </div>
+       <div class="col-md-10">
+          <p style="color:green;">'.$com->comment_name.'</p>
+         <p>'.$com->comment.' </p>
+         </div>
+            </div>
+           ';
+       }
+       echo $put;
+    }
+    public function send_comment(Request $request){
+        $id_product = $request->product_id;   
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment_content;
+
     }
 }

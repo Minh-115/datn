@@ -39,7 +39,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{route('categories.index')}}" class="nav-link">
+            <a href="{{route('categories.indexx')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Danh muc san pham
@@ -72,7 +72,14 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="{{URL::to('/manage_order')}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               Quản lý đơn hàng
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
